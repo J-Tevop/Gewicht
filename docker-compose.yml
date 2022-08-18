@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  gew:
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.gew.rule=Host(`gew-dev.nl`)
+      - traefik.http.routers.gew.tls=true
+      - traefik.http.services.gew.loadbalancer.server.port=3000
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        USERID: ${USERID:-1000}
+        GROUPID: ${GROUPID:-1000}
+      target: dev
+    volumes:
+      - .:/usr/src/app
+    env_file:
+      - .env.local
+    ports:
+      - "3000:3000" 
+
+networks:
+  default:
+    name: gew
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.120.0/24

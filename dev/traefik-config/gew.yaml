@@ -1,0 +1,4 @@
+tls:
+  certificates:
+    - certFile: /var/certs/gew-dev.nl.pem
+      keyFile: /var/certs/gew-dev.nl-key.pem
