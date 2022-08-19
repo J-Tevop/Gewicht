@@ -1,3 +1,7 @@
+start:
+	@echo "\n=== Starting server ===\n"
+	npm run dev
+
 do-start:
 	@echo "\n=== Starting project containers ===\n"
 	@${docker-compose-up} || ( echo "\n Could not start containers \n"; exit 1 )
